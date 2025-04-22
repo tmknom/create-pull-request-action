@@ -1,23 +1,49 @@
-name: Rename me
+name: Create Pull Request
 description: |
-  Template repository for creating Composite Action with GitHub Actions.
+  This action creates a new pull request.
 
   ## Usage
 
-  Write usage for your Composite Action.
-
   ```yaml
     steps:
-      - name: Template
-        uses: tmknom/template-composite-action@v0
+      - name: Create Pull Request
+        uses: tmknom/create-pull-request-action@v0
+        with:
+          head-branch: feat/new-branch
   ```
+
+inputs:
+  head-branch:
+    required: true
+    description: The branch that contains commits for the pull request.
+  base-branch:
+    required: false
+    description: The branch into which you want your code merged.
+  title:
+    required: false
+    description: The title for the pull request.
+  body:
+    required: false
+    description: The body for the pull request.
 
 runs:
   using: composite
 
   steps:
-    - name: Run
+    - name: Create
+      env:
+        BASE_BRANCH: ${{ inputs.base-branch }}
+        HEAD_BRANCH: ${{ inputs.head-branch }}
+        TITLE: ${{ inputs.title }}
+        BODY: ${{ inputs.body }}
+        GITHUB_TOKEN: ${{ github.token }}
       run: |
+        echo "::group::Create"
         set -x
-        echo "Write steps"
+        declare -a flags=(--base "${BASE_BRANCH}" --head "${HEAD_BRANCH}")
+        flags+=(--title "${TITLE}")
+        flags+=(--body "${BODY}")
+
+        gh pr create "${flags[@]}"
+        echo "::endgroup::"
       shell: bash

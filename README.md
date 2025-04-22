@@ -1,26 +1,31 @@
-# template-composite-action
+# create-pull-request-action
 
-Template repository for Composite Action.
+Create a pull request.
 
 <!-- actdocs start -->
 
 ## Description
 
-Template repository for creating Composite Action with GitHub Actions.
+This action creates a new pull request.
 
 ## Usage
 
-Write usage for your Composite Action.
-
 ```yaml
   steps:
-    - name: Template
-      uses: tmknom/template-composite-action@v0
+    - name: Create Pull Request
+      uses: tmknom/create-pull-request-action@v0
+      with:
+        head-branch: feat/new-branch
 ```
 
 ## Inputs
 
-N/A
+| Name | Description | Default | Required |
+| :--- | :---------- | :------ | :------: |
+| head-branch | The branch that contains commits for the pull request. | n/a | yes |
+| base-branch | The branch into which you want your code merged. | n/a | no |
+| body | The body for the pull request. | n/a | no |
+| title | The title for the pull request. | n/a | no |
 
 ## Outputs
 
@@ -30,7 +35,9 @@ N/A
 
 ## Permissions
 
-N/A
+| Scope         | Access |
+| :------------ | :----- |
+| pull-requests | write  |
 
 ## FAQ
 
@@ -44,4 +51,4 @@ N/A
 
 See [GitHub Releases][releases].
 
-[releases]: https://github.com/tmknom/template-composite-action/releases
+[releases]: https://github.com/tmknom/create-pull-request-action/releases
