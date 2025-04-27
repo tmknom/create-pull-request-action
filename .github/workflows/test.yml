@@ -30,7 +30,7 @@ jobs:
 
       - name: Setup
         id: setup
-        uses: tmknom/git-push-action@600da3868b2ab03e581b51e02405adceeabeda31 # v0.4.0
+        uses: tmknom/git-push-action@419dadebef56a31a87e80ce1d6388fb13521cf98 # v0.5.1
         with:
           message: 'dummy: ${{ github.job }}/${{ github.run_id }}/${{ github.run_attempt }}'
           branch: pseudo-pr/${{ github.job }}-${{ github.run_id }}-${{ github.run_attempt }}
